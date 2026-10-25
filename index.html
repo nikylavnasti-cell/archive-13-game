@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10131d">
+<title>АРХИВ 13 — Охота на преступника</title>
+<style>
+:root{--bg:#10131d;--panel:#1a2030;--panel2:#222b3e;--ink:#f2f0e9;--muted:#b9c0cc;--gold:#d7b879;--red:#b95f61;--line:#39445a;--green:#82b99a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#30374a 0,#151a27 42%,#0d1018 100%);color:var(--ink);font:16px/1.55 Georgia,serif;min-height:100vh}
+button,input{font:inherit}button{cursor:pointer}
+.shell{width:min(1000px,calc(100% - 28px));margin:0 auto;padding:24px 0 60px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:14px;border-bottom:1px solid var(--line);padding:8px 0 16px;margin-bottom:24px}
+.brand{letter-spacing:.2em;color:var(--gold);font:700 12px/1.2 Arial,sans-serif}.top small{color:var(--muted);font:12px Arial,sans-serif}
+.music{background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:30px;padding:8px 13px;font:12px Arial,sans-serif}
+.panel{background:linear-gradient(145deg,rgba(34,43,62,.96),rgba(22,27,40,.97));border:1px solid var(--line);border-radius:18px;padding:clamp(20px,4vw,38px);box-shadow:0 20px 70px #0005}
+.kicker{font:700 11px Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+h1,h2,h3{font-weight:normal;line-height:1.2;margin:.4em 0 .65em}h1{font-size:clamp(32px,6vw,58px)}h2{font-size:clamp(25px,4vw,36px)}h3{font-size:22px}
+p{color:#e0e1e3}.muted{color:var(--muted)}.gold{color:var(--gold)}
+.btn{border:0;border-radius:10px;padding:12px 20px;background:var(--gold);color:#171923;font:700 14px Arial,sans-serif;margin:8px 8px 0 0;transition:.2s}
+.btn:hover{filter:brightness(1.1);transform:translateY(-1px)}.btn.secondary{background:#303b51;color:var(--ink);border:1px solid #4a5872}.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+input[type=text],input[type=url]{width:min(100%,520px);background:#101522;border:1px solid #536079;border-radius:9px;padding:12px;color:white;outline:none}
+input:focus{border-color:var(--gold)}
+.progress{height:5px;background:#30394b;border-radius:9px;overflow:hidden;margin:15px 0 24px}.progress span{display:block;height:100%;background:var(--gold);width:0;transition:width .3s}
+.meta{display:flex;justify-content:space-between;color:var(--muted);font:12px Arial,sans-serif}
+.taskbox{margin:20px 0;padding:18px;background:#111724;border:1px solid #364258;border-radius:13px}
+.notice{padding:12px 14px;border-left:3px solid var(--gold);background:#ffffff08;color:#e8e5dd;margin:16px 0}
+.feedback{min-height:25px;color:var(--gold);margin:12px 0;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.choice{background:#252f43;border:1px solid #4a5870;color:var(--ink);padding:13px;border-radius:10px;text-align:left}
+.choice.selected{border-color:var(--gold);background:#51452e}.choice.correct{border-color:var(--green)}
+.clues{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.clue{border:1px solid #59647a;background:#202a3c;border-radius:8px;padding:7px 10px;font-size:12px;color:#e6dfcd}
+.room{height:310px;position:relative;border:1px solid #59647a;border-radius:12px;overflow:hidden;background:linear-gradient(#171c2b,#090c13);touch-action:none}
+.room:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 49%,#ffffff12 50%,transparent 51%),linear-gradient(transparent 69%,#ffffff18 70%,transparent 71%);opacity:.7}
+.shelf{position:absolute;left:10%;top:20%;width:25%;height:43%;border:8px solid #3b2e28;border-bottom-width:12px;background:repeating-linear-gradient(to bottom,#46372e 0 8px,#171c27 8px 54px)}
+.desk{position:absolute;right:10%;bottom:19%;width:38%;height:13%;background:#594333;border:5px solid #382b25}
+.desk:after{content:"";position:absolute;left:12%;top:100%;width:8px;height:58px;background:#382b25;box-shadow:190px 0 #382b25}
+.window{position:absolute;right:13%;top:10%;width:27%;height:36%;border:7px solid #4b5262;background:linear-gradient(135deg,#283b50,#111a29)}
+.window:before{content:"";position:absolute;left:48%;height:100%;border-left:4px solid #4b5262}.window:after{content:"";position:absolute;top:48%;width:100%;border-top:4px solid #4b5262}
+.shellfish{position:absolute;left:69%;top:68%;font-size:31px;filter:drop-shadow(0 0 5px #d6b778);cursor:pointer;z-index:3}
+.darkness{position:absolute;inset:0;background:radial-gradient(circle 75px at var(--x,50%) var(--y,50%),transparent 0 45%,#000 100%);pointer-events:none;z-index:2}
+.roomhint{position:absolute;z-index:4;left:10px;bottom:8px;font:11px Arial;color:#d9d9d9;text-shadow:0 1px 3px black}
+.morse{display:grid;grid-template-columns:repeat(auto-fit,minmax(95px,1fr));gap:7px}.morse span{background:#252e40;padding:6px;border-radius:6px;text-align:center;font:12px Arial}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.tile{height:80px;border-radius:7px;background:linear-gradient(135deg,#7a7468,#252b36);border:1px solid #9a8f7c;cursor:pointer;position:relative}.tile:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,#c8bba0 0 2px,transparent 2px 7px);opacity:.3}.tile.clean{background:linear-gradient(135deg,#202d40,#60718a);opacity:.5}
+.switches{display:flex;gap:12px;flex-wrap:wrap}.switch{padding:15px 20px;border:1px solid #526079;background:#29354b;border-radius:9px;color:white}.switch.on{background:#375746;border-color:#82b99a}
+.gears{display:flex;gap:12px;flex-wrap:wrap}.gear{padding:18px;border:1px solid #59647a;background:#293247;border-radius:50%;width:94px;height:94px;text-align:center;display:grid;place-items:center;cursor:pointer}
+.gear.active{outline:3px solid var(--gold)}
+.items{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.item{padding:15px;background:#273249;border:1px solid #4d5c75;border-radius:9px}
+.suspects{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
+.person{background:#1a2232;border:1px solid #48556d;border-radius:11px;overflow:hidden}
+.portrait{height:155px;background:linear-gradient(135deg,#4b5667,#202738);display:flex;align-items:center;justify-content:center;position:relative}
+.portrait svg{width:100%;height:100%}.person p{font:12px Arial,sans-serif;margin:8px 10px;color:#cbd1dc}
+.letter{background:#eee4cb;color:#2c2b29;padding:clamp(20px,5vw,42px);border-radius:5px;box-shadow:0 12px 35px #0005;max-width:720px;margin:20px auto;font-size:17px}
+footer{text-align:center;color:#6f7888;font:11px Arial,sans-serif;margin-top:25px}
+.hidden{display:none!important}
+@media(max-width:600px){.top{align-items:flex-start}.room{height:260px}.shellfish{left:68%;top:69%}.desk:after{box-shadow:120px 0 #382b25}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="top"><div><div class="brand">АРХИВ 13</div><small>закрытое дело № 013 / отдел внутренних расследований</small></div><button class="music" id="musicBtn">♫ Включить атмосферу</button></header>
+<div class="meta"><span id="stageLabel">ПРОЛОГ</span><span id="clueCount">УЛИКИ: 0 / 10</span></div>
+<div class="progress"><span id="progress"></span></div>
+<main id="app" class="panel">
+<div class="kicker">Дело № 013 · личное расследование</div>
+<h1>Охота на преступника</h1>
+<p>В старом исследовательском архиве произошло странное происшествие. Из запертого хранилища исчезла важная папка, а записи камер оказались повреждены.</p>
+<p>Шесть сотрудников находились в здании в тот вечер. Каждый что-то скрывает. Тебе предстоит восстановить события, собрать улики и определить, кто проник в хранилище.</p>
+<div class="notice">Правило расследования: не делай вывод по одной детали. Сопоставляй все улики — некоторые сотрудники могут лгать, не будучи преступниками.</div>
+<button class="btn" id="startBtn">Начать расследование</button>
+</main>
+<footer>АРХИВ 13 · интерактивный детективный квест</footer>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+let step=0, clues=[], audioCtx=null, master=null, selected=[];
+const clueTexts=[
+"На увеличенном снимке виден силуэт человека с густыми кудрями.",
+"На ракушке сохранились крупинки мелкого песка и волокна тёмной ткани.",
+"Характер царапин на панели указывает: рычагом управляли левой рукой.",
+"Журнал подтверждает: один из сотрудников солгал о повторном входе. Но ложь ещё не доказывает кражу.",
+"На обороте снимка обнаружена печать мастерской по ремонту старинных часов.",
+"На панели остался след тонкого инструмента, которым пользуются при настройке часовых механизмов.",
+"Внутри часов лежала записка: «Мне нравится возвращать старым механизмам ход».",
+"В футляре найдены инструменты для мелких деталей; на билете — следы того же металлического порошка.",
+"На сейфе обнаружен отпечаток ткани с мелким диагональным рубчиком.",
+"На последнем фрагменте видны тёмные волосы, а на перчатке — остатки часовой смазки."
+];
+const tasks=[
+{title:"Книга неизвестных знаков",desc:"На первой странице найдено послание. Используй таблицу соответствий и расшифруй слово.",render:()=>`
+<div class="taskbox"><p class="gold">ТАБЛИЦА ЗНАКОВ</p><div class="grid" style="grid-template-columns:repeat(7,1fr)">
+${["А","Б","В","Г","Д","Е","Ё","Ж","З","И","Й","К","Л","М","Н","О","П","Р","С","Т","У","Ф","Х","Ц","Ч","Ш","Щ","Ъ","Ы","Ь","Э","Ю","Я"].map((c,i)=>`<div class="choice" style="text-align:center;padding:8px"><b>${["⌁","⌖","⋔","⌘","⌗","⌬","⌭","⌯","⌰","⌱","⌲","⌳","⌴","⌵","⌶","⌷","⌸","⌹","⌺","⌻","⌼","⌽","⌾","⌿","⍀","⍁","⍂","⍃","⍄","⍅","⍆","⍇","⍈"][i]}</b><br><small>${c}</small></div>`).join("")}
+</div><p>Зашифрованная последовательность:</p><h2 class="gold">⌰ ⌁ ⌸ ⌱ ⌺ ⌲ ⌁</h2></div>
+<input id="answer" type="text" placeholder="Введи расшифрованное слово">`,
+check:v=>v.trim().toUpperCase()==="ЗАПИСКА"},
+{title:"Осмотр кабинета",desc:"В комнате темно. Перемещай фонарик по помещению и найди предмет, который не должен здесь находиться.",render:()=>`
+<div class="room" id="room"><div class="shelf"></div><div class="window"></div><div class="desk"></div><div class="shellfish" id="shell" title="Найденная ракушка">🐚</div><div class="darkness" id="dark"></div><div class="roomhint">Двигай курсор или палец по комнате. Нажми на найденный предмет.</div></div><div class="feedback" id="roomFeedback">Фонарик выключен. Начни осмотр.</div>`,
+check:()=>window.roomFound===true},
+{title:"Радиоперехват",desc:"Радиостанция передала короткое сообщение азбукой Морзе. Расшифруй его с помощью полной таблицы русской азбуки.",render:()=>`
+<div class="taskbox"><p class="gold">ПЕРЕДАННЫЙ СИГНАЛ</p><h2>−·− ·−·· ··−− −−−·</h2><p class="muted">Подсказка: точки и тире разделяют буквы пробелами.</p><div class="morse">${Object.entries({"А":"·−","Б":"−···","В":"·−−","Г":"−−·","Д":"−··","Е":"·","Ё":"·","Ж":"···−","З":"−−··","И":"··","Й":"·−−−","К":"−·−","Л":"·−··","М":"−−","Н":"−·","О":"−−−","П":"·−−·","Р":"·−·","С":"···","Т":"−","У":"··−","Ф":"··−·","Х":"····","Ц":"−·−·","Ч":"−−−·","Ш":"−−−−","Щ":"−−·−","Ъ":"−−·−−","Ы":"−·−−","Ь":"−··−","Э":"··−··","Ю":"··−−","Я":"·−·−"}).map(([a,b])=>`<span><b>${a}</b> ${b}</span>`).join("")}</div></div><input id="answer" type="text" placeholder="Введи слово">`,
+check:v=>v.trim().toUpperCase()==="КЛЮЧ"},
+{title:"Журнал доступа",desc:"Сотрудник утверждает, что покинул архив в 22:40 и больше не возвращался. Изучи журнал и выясни, кто солгал именно о повторном входе.",render:()=>`
+<div class="taskbox"><p class="gold">ЖУРНАЛ ПРОХОДНОЙ · 14 НОЯБРЯ</p><div style="max-height:270px;overflow:auto"><table style="width:100%;border-collapse:collapse;font:13px Arial"><tr><th align="left">Время</th><th align="left">Событие</th></tr>${[
+["18:02","Вера Климова — вход"],["18:17","Павел Громов — вход"],["18:35","Нина Волкова — вход"],["19:04","Борис Егоров — вход"],["19:26","Лев Орлов — вход"],["20:11","Марк Серов — вход"],["20:48","Вера Климова — выход"],["21:03","Павел Громов — выход"],["21:36","Нина Волкова — выход"],["21:52","Борис Егоров — выход"],["22:14","Лев Орлов — выход"],["22:40","Марк Серов — выход"],["22:51","Дежурный — вход"],["23:05","Марк Серов — вход"],["23:12","Дежурный — выход"],["23:19","Марк Серов — выход"],["23:24","Служебная дверь — открыта изнутри"],["23:41","Охрана — обход"]].map(r=>`<tr><td style="padding:7px;border-bottom:1px solid #39445a">${r[0]}</td><td style="padding:7px;border-bottom:1px solid #39445a">${r[1]}</td></tr>`).join("")}</table></div></div><p>Кто солгал о том, что не возвращался?</p><div class="grid">${["Марк Серов","Вера Климова","Павел Громов","Нина Волкова","Борис Егоров","Лев Орлов"].map(x=>`<button class="choice" onclick="pick('${x}')">${x}</button>`).join("")}</div><input id="answer" type="hidden">`,
+check:v=>v==="Марк Серов"},
+{title:"Очистить фотографию",desc:"На повреждённом снимке скрыта важная деталь. Нажми на все девять участков, чтобы убрать архивную пыль.",render:()=>`<div class="taskbox"><div class="tiles">${Array.from({length:9},(_,i)=>`<button class="tile" onclick="cleanTile(this)" aria-label="Очистить участок ${i+1}"></button>`).join("")}</div><p id="cleanCount" class="muted">Очищено: 0 / 9</p></div>`,
+check:()=>document.querySelectorAll(".tile.clean").length===9},
+{title:"Восстановить питание",desc:"Электрическая панель повреждена. Для подачи питания включи каналы 1 и 3, а канал 2 оставь выключенным.",render:()=>`<div class="taskbox"><div class="switches">${[1,2,3].map(n=>`<button class="switch" data-n="${n}" onclick="this.classList.toggle('on');this.textContent='Канал ${n}: '+(this.classList.contains('on')?'ВКЛ':'ВЫКЛ')">Канал ${n}: ВЫКЛ</button>`).join("")}</div></div>`,
+check:()=>[...document.querySelectorAll(".switch")].every(b=>b.classList.contains("on")===(b.dataset.n!=="2"))},
+{title:"Починить часовой механизм",desc:"Три шестерёнки выпали из механизма. Расставь их слева направо: маленькая, большая, средняя.",render:()=>`<div class="taskbox"><p class="muted">Нажимай шестерёнки в нужной последовательности.</p><div class="gears">${["Средняя","Маленькая","Большая"].map(x=>`<button class="gear" onclick="gearPick('${x}',this)">${x}</button>`).join("")}</div><p id="gearOrder" class="gold">Порядок: —</p></div>`,
+check:()=>window.gearOrder?.join("|")==="Маленькая|Большая|Средняя"},
+{title:"Сортировка предметов",desc:"Раздели предметы на архивные и посторонние. Выбери два предмета, которые не относятся к архиву.",render:()=>`<div class="items">${["Карточка учёта","Ракушка","Ключ от шкафа","Билет на поезд"].map((x,i)=>`<button class="item choice" onclick="this.classList.toggle('selected')">${x}</button>`).join("")}</div><p class="muted">Отметь ровно два посторонних предмета.</p>`,
+check:()=>{let a=[...document.querySelectorAll(".item.selected")].map(x=>x.textContent);return a.length===2&&a.includes("Ракушка")&&a.includes("Билет на поезд")}},
+{title:"Кодовый сейф",desc:"На записке указано: число шкафов, часы на стене, количество выходов и этаж, где находится архив. Собери четырёхзначный код.",render:()=>`<div class="taskbox"><div class="grid"><div class="choice">Шкафов: <b>3</b></div><div class="choice">Часы: <b>1</b></div><div class="choice">Выхода: <b>2</b></div><div class="choice">Этаж: <b>6</b></div></div><p class="gold">КОДОВАЯ ПАНЕЛЬ</p><input id="answer" type="text" maxlength="4" placeholder="••••" inputmode="numeric"></div>`,
+check:v=>v.trim()==="3126"},
+{title:"Настроить радиоприёмник",desc:"Сигнал архивной мастерской находится ровно посередине между 90 и 100 МГц. На какую частоту настроить приёмник?",render:()=>`<div class="taskbox"><h2 class="gold">90 ━━━━━ ? ━━━━━ 100 МГц</h2><input id="answer" type="text" placeholder="Частота в МГц"></div>`,
+check:v=>v.trim().replace(",",".")==="95"}
+];
+window.roomFound=false;window.gearOrder=[];
+function pick(v){$("#answer").value=v;document.querySelectorAll(".choice").forEach(b=>b.classList.toggle("selected",b.textContent===v))}
+function cleanTile(el){el.classList.add("clean");$("#cleanCount").textContent=`Очищено: ${document.querySelectorAll(".tile.clean").length} / 9`}
+function gearPick(v,el){if(window.gearOrder.length>=3)window.gearOrder=[];if(window.gearOrder.includes(v))return;window.gearOrder.push(v);el.classList.add("active");$("#gearOrder").textContent="Порядок: "+window.gearOrder.join(" → ")}
+function bindRoom(){const room=$("#room"),dark=$("#dark");if(!room)return;const move=e=>{let r=room.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;dark.style.setProperty("--x",x+"px");dark.style.setProperty("--y",y+"px");$("#roomFeedback").textContent="Фонарик освещает участок комнаты…"};room.addEventListener("pointermove",move);$("#shell").addEventListener("click",()=>{window.roomFound=true;$("#roomFeedback").textContent="Найдена ракушка! Предмет отмечен как улика.";$("#shell").style.transform="scale(1.35)";$("#shell").style.filter="drop-shadow(0 0 15px #f2d58d)"})}
+function renderTask(){let t=tasks[step];$("#stageLabel").textContent=`ЗАДАНИЕ ${step+1} / 10` ;$("#progress").style.width=(step/10*100)+"%";$("#clueCount").textContent=`УЛИКИ: ${clues.length} / 10`;
+$("#app").innerHTML=`<div class="kicker">Этап ${step+1} · расследование</div><h2>${t.title}</h2><p>${t.desc}</p>${t.render()}<div class="feedback" id="feedback"></div><button class="btn" id="checkBtn">Проверить ответ</button><button class="btn secondary" id="hintBtn">Напомнить условие</button>`;
+if(step===1)bindRoom();
+$("#checkBtn").onclick=()=>{let input=$("#answer"),v=input?input.value:"";if(t.check(v)){clues.push(clueTexts[step]);showClue()}else{$("#feedback").textContent="Пока неверно. Внимательно проверь условие и попробуй ещё раз."}};
+$("#hintBtn").onclick=()=>$("#feedback").textContent=t.desc;
+}
+function showClue(){let c=clues[clues.length-1];$("#app").innerHTML=`<div class="kicker">Новая улика обнаружена</div><h2>Фрагмент досье ${String(clues.length).padStart(2,"0")}</h2><div class="notice">${c}</div><p class="muted">Улика сохранена. Она появится в итоговом досье.</p><button class="btn" id="nextBtn">${step===9?"Перейти к финалу":"Продолжить"}</button>`;$("#clueCount").textContent=`УЛИКИ: ${clues.length} / 10`;$("#progress").style.width=(clues.length/10*100)+"%";$("#nextBtn").onclick=()=>{step++;if(step<10)renderTask();else renderFinal()}}
+const people=[
+{n:"Марк Серов",hair:"#b98c61",style:"short",beard:false,item:"блокнот",hand:"правая",shirt:"#45566b"},
+{n:"Вера Климова",hair:"#a34f35",style:"long",beard:false,item:"папка",hand:"правая",shirt:"#684c58",female:true},
+{n:"Павел Громов",hair:"#b9b9b2",style:"short",beard:true,item:"фонарик",hand:"правая",shirt:"#4e5a62"},
+{n:"Нина Волкова",hair:"#302b2a",style:"short",beard:false,item:"планшет",hand:"правая",shirt:"#59606f",female:true,glasses:true},
+{n:"Лев Орлов",hair:"#201b1c",style:"curly",beard:true,item:"часовая лупа и отвёртка",hand:"левая",shirt:"#353b43"},
+{n:"Борис Егоров",hair:"#282322",style:"short",beard:true,item:"связка ключей",hand:"правая",shirt:"#5a5148"}
+];
+function portrait(p,i){let hair=p.hair,skin="#d5a17f",shirt=p.shirt;let hairPath=p.style==="curly"?`<path d="M38 78 Q20 45 42 30 Q48 10 66 27 Q84 8 98 28 Q122 22 122 58 L116 87 Q103 58 91 58 Q70 75 47 60Z" fill="${hair}"/>`:`<path d="M37 75 Q30 24 78 23 Q126 25 119 78 L111 111 L44 110Z" fill="${hair}"/>`;return `<svg viewBox="0 0 160 170" role="img" aria-label="Портрет ${p.n}"><defs><linearGradient id="bg${i}" x2="1" y2="1"><stop stop-color="#657184"/><stop offset="1" stop-color="#252d3d"/></linearGradient></defs><rect width="160" height="170" fill="url(#bg${i})"/><path d="M23 170 Q25 120 55 111 L105 111 Q137 126 140 170" fill="${shirt}"/><path d="M59 104 L57 124 L81 145 L104 122 L100 103" fill="${skin}"/>${hairPath}<ellipse cx="80" cy="75" rx="34" ry="42" fill="${skin}"/><path d="M47 66 Q48 25 82 28 Q113 25 115 67 Q94 48 74 53 Q58 53 47 66" fill="${hair}"/>${p.beard?`<path d="M49 91 Q80 120 111 91 Q107 124 80 126 Q54 122 49 91" fill="${hair}"/>`:""}<circle cx="67" cy="77" r="3" fill="#26232a"/><circle cx="94" cy="77" r="3" fill="#26232a"/><path d="M72 94 Q80 99 88 94" fill="none" stroke="#744b45" stroke-width="2"/>${p.glasses?`<circle cx="67" cy="77" r="11" fill="none" stroke="#272a30" stroke-width="2"/><circle cx="94" cy="77" r="11" fill="none" stroke="#272a30" stroke-width="2"/><path d="M78 77h5" stroke="#272a30" stroke-width="2"/>`:""}<g transform="${p.hand==="левая"?"translate(160 0) scale(-1 1)":""}"><rect x="110" y="116" width="28" height="40" rx="5" fill="#c6a878" stroke="#322d29" stroke-width="2"/><path d="M116 116v-12h15v12" stroke="#d4b88d" stroke-width="5" fill="none"/></g><text x="80" y="161" fill="#f3e6c8" text-anchor="middle" font-size="8" font-family="Arial">${p.item.toUpperCase()}</text></svg>`}
+function renderFinal(){ $("#stageLabel").textContent="ФИНАЛЬНОЕ ДОСЬЕ";$("#progress").style.width="100%";$("#app").innerHTML=`<div class="kicker">Последний этап · сопоставление улик</div><h2>Кто проник в хранилище?</h2><p>Перед тобой шесть сотрудников архива. Сопоставь их внешность, предметы и привычки со всеми найденными уликами. Важно: сотрудник, который солгал в журнале, не обязательно является преступником.</p><div class="suspects">${people.map((p,i)=>`<div class="person"><div class="portrait">${portrait(p,i)}</div><p><b>${p.n}</b><br>Предмет: ${p.item}<br>Рука: ${p.hand}</p></div>`).join("")}</div><h3 class="gold">Собранные улики</h3><div class="clues">${clues.map((c,i)=>`<div class="clue">${i+1}. ${c}</div>`).join("")}</div><p>Введи имя и фамилию подозреваемого.</p><input id="culprit" type="text" placeholder="Имя и фамилия"><div class="feedback" id="finalFeedback"></div><button class="btn" id="solveBtn">Завершить расследование</button>`;
+$("#solveBtn").onclick=()=>{let v=$("#culprit").value.trim().toLowerCase();if(v==="лев орлов"){renderLetter()}else $("#finalFeedback").textContent="Это не сходится со всеми уликами. Пересмотри досье и попробуй ещё раз."}}
+function renderLetter(){$("#stageLabel").textContent="ДЕЛО ЗАКРЫТО";$("#app").innerHTML=`<div class="kicker">Расследование завершено</div><h2>Ты раскрыла дело</h2><div class="notice">Преступник найден. Все улики сошлись в одной версии.</div><p>Но в архиве осталось кое-что, что не относится к расследованию…</p><button class="btn" id="letterBtn">Открыть последнее письмо</button>`;$("#letterBtn").onclick=()=>{$("#app").innerHTML=`<div class="kicker">Личное сообщение · адресовано тебе</div><div class="letter"><h2>Для тебя</h2><p>Если ты читаешь это письмо, значит, ты прошла весь путь до конца. Ты внимательно искала детали, не сдавалась, когда ответы не находились сразу, и сумела соединить даже самые маленькие подсказки.</p><p>Я хотела устроить для тебя не просто игру, а маленькое приключение — с тайнами, неожиданностями и моментом, когда всё наконец становится на свои места.</p><p>Спасибо за твою дружбу, за наши разговоры, воспоминания и за то, что ты есть в моей жизни. Пусть впереди будет ещё много историй, которые мы будем создавать вместе.</p><p>С теплом,<br>твой человек ❤️</p><hr style="border-color:#b6a98d"><h3>Последний секрет</h3><p>Вставь ссылку на песню, которую я приготовила для тебя. После этого появится QR-код.</p><input id="songUrl" type="url" placeholder="https://..."><br><button class="btn" id="qrBtn">Создать QR-код</button><div id="qrArea"></div></div>`;$("#qrBtn").onclick=()=>{let u=$("#songUrl").value.trim();if(!/^https?:\\/\\//i.test(u)){alert("Вставь полную ссылку, начинающуюся с https:// или http://");return}$("#qrArea").innerHTML=`<p>Отсканируй QR-код камерой телефона:</p><img alt="QR-код со ссылкой на песню" style="width:220px;height:220px;background:white;padding:8px;border-radius:8px" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(u)}"><p><a style="color:#5d5139" href="${u.replace(/"/g,"&quot;")}" target="_blank" rel="noopener">Открыть песню</a></p>`}}}
+$("#startBtn").onclick=()=>{step=0;clues=[];renderTask()};
+let musicOn=false,oscillators=[];
+$("#musicBtn").onclick=()=>{if(!audioCtx){audioCtx=new(window.AudioContext||window.webkitAudioContext)();master=audioCtx.createGain();master.gain.value=.035;master.connect(audioCtx.destination)}
+if(!musicOn){audioCtx.resume();[55,82.41,110].forEach((f,i)=>{let o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=i===1?"triangle":"sine";o.frequency.value=f;g.gain.value=i===0?.45:.16;o.connect(g);g.connect(master);o.start();oscillators.push(o)});musicOn=true;$("#musicBtn").textContent="♫ Выключить атмосферу"}else{oscillators.forEach(o=>o.stop());oscillators=[];musicOn=false;$("#musicBtn").textContent="♫ Включить атмосферу"}};
+</script>
+</body>
+</html>
